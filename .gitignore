@@ -1,11 +1,8 @@
-#ignore the data file
-algs4-data
-
-#ignore the build folder
+#to be ignore due to gradle
+.gradle/
+gradle/
 build/
 
-#ignore algs4.jar
+#to be ignore project files
 algs4.jar
-
-#ignore .swp files
-*.swp
+algs4-data
