@@ -1,0 +1,17 @@
+#ifndef NODE_H
+#define NODE_H
+
+#include <memory>
+
+template<typename Item>
+class Node{
+private:
+public:
+    
+    Item item;
+    std::shared_ptr<Node> next;
+};
+
+template<typename Item>
+using ShNode=std::shared_ptr<Node<Item>>;
+#endif
