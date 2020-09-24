@@ -10,10 +10,16 @@
 #include <filesystem>
 #include <boost/algorithm/string.hpp>
 
+//for windows getting home directory
+#ifdef _WIN32
+#include <ShlObj.h>
+#endif
+
 namespace DataHandler{
     Algs4File::Algs4File(std::string fileName){
         this->fileName=fileName;
     }
+    
 
     std::vector<std::string> Algs4File::getLines()const{
         std::vector<std::string> lines;
@@ -61,4 +67,25 @@ namespace DataHandler{
         }
         return std::move(inSim);
     }
+}
+
+
+std::string DataHandler::getHomeDir()
+    #ifdef _WIN32
+    throw()
+    #endif
+{
+    std::string p;
+    #ifdef _WIN32
+        //we get parent dir here if on windows 10+
+        CHAR path[MAX_PATH];
+        if(SHGetFolderPath(NULL,CSIDL_PROFILE,NULL,0,path)!=S_OK){
+            throw std::runtime_error("no home dir found, something wen't wrong");
+        }else{
+            std::string result(path);
+            return result;
+        }
+
+    #endif
+    return p;
 }

@@ -3,6 +3,7 @@
 
 #include "node.h"
 #include "iterator.h"
+#include "dymamic_preproc.h"
 
 template<typename T>
 class StackIterator;
@@ -14,14 +15,14 @@ private:
     ShNode<Item> first;
 public:
     
-    bool isEmpty() const;
-    int size() const;
+    DYNAMIC_SPEC bool isEmpty() const;
+    DYNAMIC_SPEC int size() const;
 
-    void push(Item item);
-    Item pop();
+    DYNAMIC_SPEC void push(Item item);
+    DYNAMIC_SPEC Item pop();
 
-    StackIterator<Item> begin() override;
-    StackIterator<Item> end() override;
+    DYNAMIC_SPEC StackIterator<Item> begin() override;
+    DYNAMIC_SPEC StackIterator<Item> end() override;
 };
 
 template<typename Item>
@@ -29,10 +30,10 @@ class StackIterator:public ForwardIterator<Item>{
 private:
     ShNode<Item> node;
 public:
-    StackIterator(ShNode<Item> node);
-    StackIterator<Item> &operator++() override;
-    StackIterator<Item> operator++(int) override;
-    ShNode<Item> operator*();
+    DYNAMIC_SPEC StackIterator(ShNode<Item> node);
+    DYNAMIC_SPEC StackIterator<Item> &operator++() override;
+    DYNAMIC_SPEC StackIterator<Item> operator++(int) override;
+    DYNAMIC_SPEC ShNode<Item> operator*();
 };
 
 #endif
