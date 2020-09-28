@@ -3,37 +3,76 @@
 
 #include "node.h"
 #include "iterator.h"
-#include "dymamic_preproc.h"
-
-template<typename T>
-class StackIterator;
-
-template<typename Item>
-class Stack:public BasicIteratorMethods<StackIterator<Item>>{
-private:
-    int N;
-    ShNode<Item> first;
-public:
-    
-    DYNAMIC_SPEC bool isEmpty() const;
-    DYNAMIC_SPEC int size() const;
-
-    DYNAMIC_SPEC void push(Item item);
-    DYNAMIC_SPEC Item pop();
-
-    DYNAMIC_SPEC StackIterator<Item> begin() override;
-    DYNAMIC_SPEC StackIterator<Item> end() override;
-};
+#include <deque>
+#include <utility>
 
 template<typename Item>
 class StackIterator:public ForwardIterator<Item>{
 private:
     ShNode<Item> node;
 public:
-    DYNAMIC_SPEC StackIterator(ShNode<Item> node);
-    DYNAMIC_SPEC StackIterator<Item> &operator++() override;
-    DYNAMIC_SPEC StackIterator<Item> operator++(int) override;
-    DYNAMIC_SPEC ShNode<Item> operator*();
+    StackIterator(ShNode<Item> node){
+        this->node=node;
+    }
+
+    StackIterator<Item> &operator++() override{
+        node=node->next;
+        return *this;
+    }
+
+    const StackIterator<Item> &&operator++(int junk) override{
+       StackIterator<Item> copy(this->node);
+       node=node->next;
+       return std::move(copy);
+    }
+
+    ShNode<Item> operator*(){
+        return this->node;
+    }
+};
+
+template<typename Item>
+class Stack{
+private:
+    int N;
+    ShNode<Item> first;
+public:
+    Stack(){
+       this->first=nullptr; 
+    }
+    
+    bool isEmpty() const{
+        return N==0; 
+    }
+    int size() const{
+        return N;
+    }
+
+    void push(Item item){
+        ShNode<Item> oldFirst=this->first;
+        first=std::make_shared<Node<Item>>();
+        first->item=item;
+        first->next=oldFirst;
+        N++;
+    }
+
+    Item pop(){
+        Item item=first->item;
+        first=first->next;
+        N--;
+        return item;
+    }
+
+    StackIterator<Item> begin() {
+        //go to the beggining of the stack which is first
+        return StackIterator<Item>(this->first);
+    }
+
+    StackIterator<Item> end() {
+        //go to the end
+        return StackIterator<Item>(nullptr);
+    }
+
 };
 
 #endif

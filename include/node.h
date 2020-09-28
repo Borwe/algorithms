@@ -14,4 +14,5 @@ public:
 
 template<typename Item>
 using ShNode=std::shared_ptr<Node<Item>>;
+
 #endif

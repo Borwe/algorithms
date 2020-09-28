@@ -9,15 +9,6 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 # setup an executable
 add_executable(${PROJECT_NAME} src/main.cpp)
 
-#setup stacks library
-add_library(stack SHARED src/stack.cpp)
-if(MSVC)
-    target_compile_definitions(stack PUBLIC DYNAMIC_DLL)
-endif()
-# stack_test1
-#add_executable(stack_test1 src/stack_test.cpp)
-#target_link_libraries(stack_test1 PUBLIC stack)
-
 #setup the library to be used for reading data
 # setup for boost algos header files
 find_package(Boost 1.65)
@@ -36,6 +27,9 @@ endif()
 add_executable(data_handler_test src/data_handler_test.cpp)
 target_link_libraries(data_handler_test PUBLIC data_handler)
 
+# stack_test1
+add_executable(stack_test1 src/stack_test.cpp)
+target_link_libraries(stack_test1 PUBLIC data_handler)
 
 #for cmake compile_commands.json generation
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
