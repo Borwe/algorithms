@@ -31,6 +31,10 @@ target_link_libraries(data_handler_test PUBLIC data_handler)
 add_executable(stack_test1 src/stack_test.cpp)
 target_link_libraries(stack_test1 PUBLIC data_handler)
 
+#queue_test1
+add_executable(queue_test1 src/queue_test.cpp)
+target_link_libraries(queue_test1 PUBLIC data_handler)
+
 #for cmake compile_commands.json generation
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 IF( EXISTS "${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json" )
