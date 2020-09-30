@@ -36,9 +36,17 @@ class Stack{
 private:
     int N;
     ShNode<Item> first;
+
+    void fillInValues(Item i,Item is...){
+        
+    }
 public:
     Stack(){
        this->first=nullptr; 
+    }
+
+    Stack(Item i,Item is... ){
+        fillInValues(i,is);
     }
     
     bool isEmpty() const{
@@ -46,6 +54,10 @@ public:
     }
     int size() const{
         return N;
+    }
+
+    Item peek(){
+        return first->item;
     }
 
     void push(Item item){
