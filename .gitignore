@@ -12,3 +12,10 @@ compile_commands.json
 
 #ignore .swp files
 *.swp
+
+#ignore for java
+.classpath
+.gradle/
+.project
+.settings/
+algs4.jar
