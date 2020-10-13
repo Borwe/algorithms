@@ -4,10 +4,13 @@
 #include "node.h"
 #include "iterator.h"
 #include <deque>
+#include <iostream>
+#include <string>
 #include <utility>
+#include <sstream>
 
 template<typename Item>
-class StackIterator:public ForwardIterator<Item>{
+class StackIterator{
 private:
     ShNode<Item> node;
 public:
@@ -15,19 +18,27 @@ public:
         this->node=node;
     }
 
-    StackIterator<Item> &operator++() override{
+    void operator++() {
         node=node->next;
-        return *this;
     }
 
-    const StackIterator<Item> &&operator++(int junk) override{
-       StackIterator<Item> copy(this->node);
-       node=node->next;
-       return std::move(copy);
+    const bool operator!=(StackIterator<Item> &s2)const{
+        bool value=false;
+        if(s2.node==nullptr && this->node==nullptr){
+            //meaning they are equal
+            value=false;
+        }else if(s2.node==nullptr && this->node!=nullptr){
+            //they aren't equal
+            value =true;
+        }else if(value=this->node->item!=s2.node->item){
+            //both are not equal and non null
+            value=true;
+        }
+        return value;
     }
 
-    ShNode<Item> operator*(){
-        return this->node;
+    Item &operator*(){
+        return this->node->item;
     }
 };
 
@@ -37,16 +48,28 @@ private:
     int N;
     ShNode<Item> first;
 
-    void fillInValues(Item i,Item is...){
-        
+    template<typename ItemA,typename... ItemsA>
+    static void fillIn(Stack<ItemA> &s,const ItemA &i,const ItemsA&... is){
+        s.push(i);
+        fillIn(s,is...);
     }
+
+    template<typename ItemA>
+    static void fillIn(Stack<ItemA> &s){
+    }
+
 public:
     Stack(){
        this->first=nullptr; 
     }
 
-    Stack(Item i,Item is... ){
-        fillInValues(i,is);
+    template<typename ItemA,typename... ItemsA>
+    static Stack<ItemA> fillValues(const ItemA &i,const ItemsA&... is ){
+        Stack<ItemA> stack;
+        
+        stack.push(i);//push item i
+        fillIn(stack,is... );
+        return stack;
     }
     
     bool isEmpty() const{
@@ -85,6 +108,21 @@ public:
         return StackIterator<Item>(nullptr);
     }
 
+
+    /**
+     * For printing out items in stack as they appear
+     */
+    const std::string toString() {
+
+        std::stringstream strm;
+        for(auto &temp:(*this)){
+            strm<<temp;
+            strm<<", ";
+        }
+        strm<<"\n";
+
+        return strm.str();
+    }
 };
 
 #endif

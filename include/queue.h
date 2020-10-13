@@ -4,9 +4,11 @@
 #include "node.h"
 #include <memory>
 #include "iterator.h"
+#include <string>
+#include <sstream>
 
 template<typename Item>
-class QueueIterator:public ForwardIterator<Item>{
+class QueueIterator{
 private:
     ShNode<Item> node;
 public:
@@ -14,15 +16,15 @@ public:
         this->node=node;
     }
 
-    QueueIterator<Item> &operator++() override{
+    QueueIterator<Item> &operator++() {
         node=node->next;
         return *this;
     }
 
-    const QueueIterator<Item> &&operator++(int junk) override{
+    QueueIterator<Item> operator++(int junk) {
        QueueIterator<Item> copy(this->node);
        node=node->next;
-       return std::move(copy);
+       return copy;
     }
 
     ShNode<Item> operator*(){
@@ -81,6 +83,10 @@ public:
 
     QueueIterator<Item> end(){
         return QueueIterator<Item>(nullptr);
+    }
+
+    const std::string toString()const{
+        return "YOLO";
     }
 };
 
