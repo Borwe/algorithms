@@ -2,7 +2,14 @@
 .gradle/
 gradle/
 build/
+.classpath
+.project
+.settings/
 
 #to be ignore project files
 algs4.jar
 algs4-data
+
+# c++ files
+.clangd/
+compile_commands.json
