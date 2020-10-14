@@ -28,5 +28,9 @@ int main(){
     std::cout<<"TEST2\n";
     Stack<int> stacks2=Stack<int>::fillValues(1,2,3,4,5);
     std::cout<<stacks2.toString()<<"\n";
+
+    std::cout<<"Test3\n";
+    Queue<int> queue=Queue<int>::fillValues(1,2,3,4,5,6,7,8,9,0);
+    std::cout<<queue.toString()<<"\n";
     return 0;
 }

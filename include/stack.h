@@ -9,38 +9,6 @@
 #include <utility>
 #include <sstream>
 
-template<typename Item>
-class StackIterator{
-private:
-    ShNode<Item> node;
-public:
-    StackIterator(ShNode<Item> node){
-        this->node=node;
-    }
-
-    void operator++() {
-        node=node->next;
-    }
-
-    const bool operator!=(StackIterator<Item> &s2)const{
-        bool value=false;
-        if(s2.node==nullptr && this->node==nullptr){
-            //meaning they are equal
-            value=false;
-        }else if(s2.node==nullptr && this->node!=nullptr){
-            //they aren't equal
-            value =true;
-        }else if(value=this->node->item!=s2.node->item){
-            //both are not equal and non null
-            value=true;
-        }
-        return value;
-    }
-
-    Item &operator*(){
-        return this->node->item;
-    }
-};
 
 template<typename Item>
 class Stack{
@@ -98,14 +66,14 @@ public:
         return item;
     }
 
-    StackIterator<Item> begin() {
+    LinkedListForwardIterator<Item> begin() {
         //go to the beggining of the stack which is first
-        return StackIterator<Item>(this->first);
+        return LinkedListForwardIterator<Item>(this->first);
     }
 
-    StackIterator<Item> end() {
+    LinkedListForwardIterator<Item> end() {
         //go to the end
-        return StackIterator<Item>(nullptr);
+        return LinkedListForwardIterator<Item>(nullptr);
     }
 
 

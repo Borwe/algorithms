@@ -8,42 +8,38 @@
 #include <sstream>
 
 template<typename Item>
-class QueueIterator{
-private:
-    ShNode<Item> node;
-public:
-    QueueIterator(ShNode<Item> node){
-        this->node=node;
-    }
-
-    QueueIterator<Item> &operator++() {
-        node=node->next;
-        return *this;
-    }
-
-    QueueIterator<Item> operator++(int junk) {
-       QueueIterator<Item> copy(this->node);
-       node=node->next;
-       return copy;
-    }
-
-    ShNode<Item> operator*(){
-        return this->node;
-    }
-};
-
-
-template<typename Item>
 class Queue{
 private:
     ShNode<Item> first;
     ShNode<Item> last;
     int N;
+
+    template<typename ItemA,typename... ItemsA>
+    static void fillIn(Queue<ItemA> &q,const ItemA &i,const ItemsA&... is){
+        q.enqueue(i);
+        fillIn(q,is...);
+    }
+
+    template<typename ItemA>
+    static void fillIn(Queue<ItemA> &q){
+
+    }
 public:
     Queue(){
         first=nullptr;
         last=nullptr;
         N=0;
+    }
+
+    template<typename ItemA,typename... ItemsA>
+    static Queue<ItemA> fillValues(const ItemA &i,const ItemsA&... is){
+        Queue<ItemA> queue;
+        
+        queue.enqueue(i);
+
+        fillIn(queue,is...);
+        
+        return queue;
     }
 
     bool isEmpty(){
@@ -77,16 +73,23 @@ public:
         return item;
     }
 
-    QueueIterator<Item> begin(){
-        return QueueIterator<Item>(this->first);
+    LinkedListForwardIterator<Item> begin(){
+        return LinkedListForwardIterator<Item>(this->first);
     }
 
-    QueueIterator<Item> end(){
-        return QueueIterator<Item>(nullptr);
+    LinkedListForwardIterator<Item> end(){
+        return LinkedListForwardIterator<Item>(nullptr);
     }
 
-    const std::string toString()const{
-        return "YOLO";
+    const std::string toString(){
+        std::stringstream strm;
+
+
+        for(auto &temp:(*this)){
+            strm<<temp;
+            strm<<", ";
+        }
+        return strm.str();
     }
 };
 
