@@ -38,7 +38,7 @@ public:
         queue.enqueue(i);
 
         fillIn(queue,is...);
-        
+
         return queue;
     }
 

@@ -1,36 +1,59 @@
 #include <iostream>
-#include <utility>
 #include "queue.h"
 #include "stack.h"
 
-Stack<int> produceStackOfInts(){
-    Stack<int> ints;
 
-    for(int i=0;i<10;++i)
-        ints.push(i);
+bool validateIfCanHappen(Queue<int> &q){
+    bool result=false;
 
-    return ints;
-}
+    Stack<int> stack;
 
-Queue<std::pair<std::string,Stack<int>>> listOfPredictions(){
-    Queue<std::pair<std::string,Stack<int>>> predictions;
+    //get where to start looping from
+    int i=0;
 
-    //stack a
-    Stack<int> a;
-    return predictions;
+    while(q.size()!=0){
+        int valtoPop=q.dequeue();
+
+        //fill stack until we reach the value 
+        for(;i<=valtoPop;i++){
+            stack.push(i);
+        }
+
+        i=valtoPop;
+        
+        //then pop
+        int check=stack.pop();
+        if(check!=valtoPop){
+            result=false;
+            break;
+        }else{
+            result=true;
+        }
+
+    }
+
+    return result;
 }
 
 int main(){
-    std::cout<<"SHIT FACE\n";
-    auto stacks=produceStackOfInts();
-    std::cout<<stacks.toString()<<"\n";
+    auto a=Queue<int>::fillValues(4,3,2,1,0,9,8,7,6,5);
+    auto b=Queue<int>::fillValues(4,6,8,7,5,3,2,9,0,1);
+    auto c=Queue<int>::fillValues(2,5,6,7,4,8,9,3,1,0);
+    auto d=Queue<int>::fillValues(4,3,2,1,0,5,6,7,8,9);
+    auto e=Queue<int>::fillValues(1,2,3,4,5,6,9,8,7,0);
+    auto f=Queue<int>::fillValues(0,4,6,5,3,8,1,7,2,9);
+    auto g=Queue<int>::fillValues(1,4,7,9,8,6,5,3,0,2);
+    auto h=Queue<int>::fillValues(2,1,4,3,6,5,8,7,9,0);
 
-    std::cout<<"TEST2\n";
-    Stack<int> stacks2=Stack<int>::fillValues(1,2,3,4,5);
-    std::cout<<stacks2.toString()<<"\n";
 
-    std::cout<<"Test3\n";
-    Queue<int> queue=Queue<int>::fillValues(1,2,3,4,5,6,7,8,9,0);
-    std::cout<<queue.toString()<<"\n";
+    std::cout<<"A."<<validateIfCanHappen(a)<<"\n";
+    std::cout<<"B."<<validateIfCanHappen(b)<<"\n";
+    std::cout<<"C."<<validateIfCanHappen(c)<<"\n";
+    std::cout<<"D."<<validateIfCanHappen(d)<<"\n";
+    std::cout<<"E."<<validateIfCanHappen(e)<<"\n";
+    std::cout<<"F."<<validateIfCanHappen(f)<<"\n";
+    std::cout<<"G."<<validateIfCanHappen(g)<<"\n";
+    std::cout<<"H."<<validateIfCanHappen(h)<<"\n";
+
     return 0;
 }
