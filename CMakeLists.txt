@@ -13,7 +13,8 @@ add_executable(${PROJECT_NAME} src/main.cpp)
 # setup for boost algos header files
 find_package(Boost 1.65)
 include_directories(${Boost_INCLUDE_DIRS})
-add_library(data_handler SHARED src/data_handler.cpp)
+add_library(data_handler SHARED src/data_handler.cpp
+    src/custom_vals.cpp)
 if(MSVC)
     target_compile_definitions(data_handler PUBLIC DYNAMIC_DLL)
 endif()
@@ -38,6 +39,10 @@ target_link_libraries(queue_test1 PUBLIC data_handler)
 #ex1.3.3
 add_executable(ex1.3.3 src/ex1.3.3.cpp)
 target_link_libraries(ex1.3.3 PUBLIC data_handler)
+
+#ex1.3.4
+add_executable(ex1.3.4 src/ex1.3.4.cpp)
+target_link_libraries(ex1.3.4 PUBLIC data_handler)
 
 #for cmake compile_commands.json generation
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
