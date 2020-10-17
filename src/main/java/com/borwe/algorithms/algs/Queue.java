@@ -6,6 +6,7 @@
 package com.borwe.algorithms.algs;
 
 import com.borwe.algorithms.algs.data.SimulateInput;
+import com.borwe.algorithms.algs.data.Simulator;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import java.io.IOException;
@@ -15,9 +16,10 @@ import java.util.Iterator;
  *
  * @author brian
  */
-public class Stack<Item> implements Iterable<Item>{
+public class Queue<Item> implements Iterable<Item>{
 	
 	private Node<Item> first;
+	private Node<Item> last;
 	private int N;
 
 	public boolean isEmpty(){
@@ -28,18 +30,22 @@ public class Stack<Item> implements Iterable<Item>{
 		return N;
 	}
 
-	public void push(Item item){
-		Node oldfirst=first;
-		first=new Node();
-		first.item=item;
-		first.next=oldfirst;
+	public void enqueue(Item item){
+		Node oldLast=last;
+		last=new Node<>();
+		last.item=item;
+		if(isEmpty())
+			first=last;
+		else
+			oldLast.next=last;
 		N++;
 	}
 
-	public Item pop(){
+	public Item dequeue(){
 		Item item=first.item;
 		first=first.next;
 		N--;
+		if(isEmpty())last=null;
 		return item;
 	}
 
@@ -49,24 +55,22 @@ public class Stack<Item> implements Iterable<Item>{
 	}
 
 	public static void main(String[] args) throws IOException {
-		Stack<String> s=new Stack<>();
+		Simulator simulaor=()->{
+			Queue<String> q=new Queue<>();
+
+			while(!StdIn.isEmpty()){
+				String item=StdIn.readString();
+				if(!item.equals("-"))
+					q.enqueue(item);
+				else if(!q.isEmpty())
+					StdOut.print(q.dequeue()+" ");
+			}
+			StdOut.println("("+q.size()+" left on queue)");
+		};
 
 		SimulateInput
 				.simulateLineFromFileInput(
 						SimulateInput.getFileFullName("tobe.txt"),
-						()->{
-
-			while (!StdIn.isEmpty()){
-				String item=StdIn.readString();
-				if(!item.equals("-")){
-					s.push(item);
-				}else if(!s.isEmpty()){
-					StdOut.print(s.pop()+" ");
-				}
-			}
-
-			StdOut.println("("+s.size()+" left on stack)");
-		});
-
+						simulaor);
 	}
 }

@@ -36,6 +36,17 @@ application {
     mainClassName = 'com.borwe.algorithms.App'
 }
 
+task stackexamp (type:JavaExec){
+	main = "com.borwe.algorithms.algs.Stack"
+	classpath = sourceSets.main.runtimeClasspath
+}
+
+task queueexamp (type:JavaExec){
+	main = "com.borwe.algorithms.algs.Queue"
+	classpath = sourceSets.main.runtimeClasspath
+}
+
+
 test {
     // Use junit platform for unit tests
     useJUnitPlatform()
