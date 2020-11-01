@@ -9,7 +9,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 # setup an executable
 add_executable(${PROJECT_NAME} src/main.cpp)
 
-#setup the library to be used for reading data
+# setup the library to be used for reading data
 # setup for boost algos header files
 find_package(Boost 1.65)
 include_directories(${Boost_INCLUDE_DIRS})

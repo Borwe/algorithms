@@ -11,7 +11,7 @@
 #ifndef __GNUC__
     #include <filesystem>
 #else
-    #if __GNUC__ >= 8
+    #if __GNUC__ > 8
         #include <filesystem>
     #else
         #include <boost/filesystem.hpp>
