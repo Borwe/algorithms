@@ -1,5 +1,6 @@
 #to be ignore due to gradle
 build/
+bin/
 
 #to be ignore project files
 algs4-data/
