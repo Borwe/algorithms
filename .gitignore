@@ -5,6 +5,7 @@ build/
 .classpath
 .project
 .settings/
+bin/
 
 #to be ignore project files
 algs4.jar
