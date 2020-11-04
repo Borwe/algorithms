@@ -22,6 +22,16 @@ public class Queue<Item> implements Iterable<Item>{
 	private Node<Item> last;
 	private int N;
 
+    public Queue(){
+
+    }
+
+    public Queue(Item ...items){
+        for(Item i:items){
+            this.enqueue(i);
+        }
+    }
+
     /**
      * Fill items with array of fixed items
      */
@@ -60,6 +70,10 @@ public class Queue<Item> implements Iterable<Item>{
 		if(isEmpty())last=null;
 		return item;
 	}
+
+    public final Item peek(){
+        return first.item;
+    }
 
 	@Override
 	public Iterator<Item> iterator() {

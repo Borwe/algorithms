@@ -20,6 +20,16 @@ public class Stack<Item> implements Iterable<Item>{
 	private Node<Item> first;
 	private int N;
 
+    public Stack(){
+
+    }
+
+    public Stack(Item ...items){
+        for(Item i:items){
+            this.push(i);
+        }
+    }
+
 	public boolean isEmpty(){
 		return first==null;
 	}
@@ -43,10 +53,29 @@ public class Stack<Item> implements Iterable<Item>{
 		return item;
 	}
 
+    public final Item peek(){
+        return first.item;
+    }
+
 	@Override
 	public Iterator<Item> iterator() {
 		return new BasicIterator<Item>(first);
 	}
+
+    public String toString(){
+        String result="";
+        StringBuffer buffer=new StringBuffer();
+
+        for(Item i:this){
+            buffer.append(i.toString());
+            buffer.append(", ");
+        }
+
+        result=buffer.toString();
+        result=result.substring(0, result.length()-2);
+
+        return result;
+    }
 
 	public static void main(String[] args) throws IOException {
 		Stack<String> s=new Stack<>();
@@ -67,6 +96,5 @@ public class Stack<Item> implements Iterable<Item>{
 
 			StdOut.println("("+s.size()+" left on stack)");
 		});
-
 	}
 }
