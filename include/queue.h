@@ -73,6 +73,11 @@ public:
         return item;
     }
 
+    const Item peek() const{
+        Item item=first->item;
+        return item;
+    }
+
     LinkedListForwardIterator<Item> begin(){
         return LinkedListForwardIterator<Item>(this->first);
     }

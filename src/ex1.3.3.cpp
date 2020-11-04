@@ -3,36 +3,26 @@
 #include "stack.h"
 
 
-bool validateIfCanHappen(Queue<int> &q){
-    bool result=false;
+bool validateIfCanHappen(Queue<int> &qCheckup){
+    Stack<int> toFillAndPop;
 
-    Stack<int> stack;
+    Queue<int> queue=Queue<int>::fillValues(0,1,2,3,4,5,6,7,8,9);
 
-    //get where to start looping from
-    int i=0;
-
-    while(q.size()!=0){
-        int valtoPop=q.dequeue();
-
-        //fill stack until we reach the value 
-        for(;i<=valtoPop;i++){
-            stack.push(i);
-        }
-
-        i=valtoPop;
+    while(!qCheckup.isEmpty()){
+        int valtoPop=qCheckup.dequeue();
         
-        //then pop
-        int check=stack.pop();
-        if(check!=valtoPop){
-            result=false;
-            break;
-        }else{
-            result=true;
+        while(queue.isEmpty()==false && queue.peek()<=valtoPop){
+            toFillAndPop.push(queue.dequeue());
         }
 
+        if(valtoPop==toFillAndPop.pop()){
+            continue;
+        }else{
+            return false;
+        }
     }
 
-    return result;
+    return true;
 }
 
 int main(){
@@ -46,14 +36,14 @@ int main(){
     auto h=Queue<int>::fillValues(2,1,4,3,6,5,8,7,9,0);
 
 
-    std::cout<<"A."<<validateIfCanHappen(a)<<"\n";
-    std::cout<<"B."<<validateIfCanHappen(b)<<"\n";
-    std::cout<<"C."<<validateIfCanHappen(c)<<"\n";
-    std::cout<<"D."<<validateIfCanHappen(d)<<"\n";
-    std::cout<<"E."<<validateIfCanHappen(e)<<"\n";
-    std::cout<<"F."<<validateIfCanHappen(f)<<"\n";
-    std::cout<<"G."<<validateIfCanHappen(g)<<"\n";
-    std::cout<<"H."<<validateIfCanHappen(h)<<"\n";
+    std::cout<<"a."<<validateIfCanHappen(a)<<"\n";
+    std::cout<<"b."<<validateIfCanHappen(b)<<"\n";
+    std::cout<<"c."<<validateIfCanHappen(c)<<"\n";
+    std::cout<<"d."<<validateIfCanHappen(d)<<"\n";
+    std::cout<<"e."<<validateIfCanHappen(e)<<"\n";
+    std::cout<<"f."<<validateIfCanHappen(f)<<"\n";
+    std::cout<<"g."<<validateIfCanHappen(g)<<"\n";
+    std::cout<<"h."<<validateIfCanHappen(h)<<"\n";
 
     return 0;
 }
