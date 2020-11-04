@@ -22,6 +22,18 @@ public class Queue<Item> implements Iterable<Item>{
 	private Node<Item> last;
 	private int N;
 
+    /**
+     * Fill items with array of fixed items
+     */
+    public static <Item> Queue<Item>  generateQueuefromArray(final Item... items){
+        Queue<Item> queue=new Queue<>();
+
+        for(Item i:items){
+            queue.enqueue(i);
+        }
+        return queue;
+    }
+
 	public boolean isEmpty(){
 		return first==null;
 	}
@@ -53,6 +65,21 @@ public class Queue<Item> implements Iterable<Item>{
 	public Iterator<Item> iterator() {
 		return new BasicIterator<Item>(first);
 	}
+
+    public String toString(){
+        String result="";
+
+        StringBuffer out=new StringBuffer();
+        for(Item item:this){
+            out.append(item.toString());
+            out.append(", ");
+        }
+
+        result=out.toString();
+        result=result.substring(0, result.length()-2);
+
+        return result;
+    }
 
 	public static void main(String[] args) throws IOException {
 		Simulator simulaor=()->{

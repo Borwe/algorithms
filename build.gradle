@@ -24,6 +24,13 @@ repositories {
 	mavenCentral()
 }
 
+//for download args4.jar
+task downloadAlgs4Jar(type: Download) {
+		src 'https://algs4.cs.princeton.edu/code/algs4.jar'	
+		dest projectDir 
+		overwrite false
+}
+
 dependencies {
 	implementation files('algs4.jar')
 	
@@ -37,13 +44,6 @@ dependencies {
 application {
     // Define the main class for the application.
     mainClassName = 'com.borwe.algorithms.App'
-}
-
-//for download args4.jar
-task downloadAlgs4Jar(type: Download) {
-		src 'https://algs4.cs.princeton.edu/code/algs4.jar'	
-		dest projectDir 
-		overwrite false
 }
 
 compileJava {
@@ -60,6 +60,10 @@ task queueexamp (type:JavaExec){
 	classpath = sourceSets.main.runtimeClasspath
 }
 
+task ex1_3_3 (type:JavaExec){
+    main = "com.borwe.algorithms.exercises.Ex1_3_3"
+    classpath = sourceSets.main.runtimeClasspath
+}
 
 test {
     // Use junit platform for unit tests
