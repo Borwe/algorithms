@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.13)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -18,11 +18,18 @@ add_library(data_handler SHARED src/data_handler.cpp
 if(MSVC)
     target_compile_definitions(data_handler PUBLIC DYNAMIC_DLL)
 endif()
-if(${CMAKE_COMPILER_IS_GNUCXX})
-    message(-- Using GCC)
-    if(CMAKE_COMPILER_VERSION VERSION_LESS 8.0)
-        find_package(Boost 1.65 COMPONENTS REQUIRED filesystem)
-        target_link_libraries(data_handler PUBLIC Boost::filesystem)
+if(UNIX)
+    message("-- Using Uinx")
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "GCC")
+        if(CMAKE_COMPILER_VERSION VERSION_LESS 8.0)
+            find_package(Boost 1.65 COMPONENTS REQUIRED filesystem)
+            target_link_libraries(data_handler PUBLIC Boost::filesystem)
+        endif()
+    endif()
+    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+        message("-- Nice, cool kids use clang")
+        target_compile_options(data_handler PUBLIC  "-stdlib=libc++")
+        add_link_options(-lc++abi -lc++)
     endif()
 endif()
 add_executable(data_handler_test src/data_handler_test.cpp)
@@ -46,6 +53,10 @@ target_link_libraries(ex1.3.4 PUBLIC data_handler)
 
 #ex1.3.9
 add_executable(ex1.3.9 src/ex1.3.9.cpp)
+
+#if using linux and using clang, then set the compler to use libc++
+IF( EXISTS UNIX )
+ENDIF()
 
 #for cmake compile_commands.json generation
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

@@ -13,6 +13,8 @@
 #else
     #if __GNUC__ > 8
         #include <filesystem>
+    #elif __clang_major__ > 6
+        #include <filesystem>
     #else
         #include <boost/filesystem.hpp>
     #endif
@@ -46,6 +48,9 @@ namespace DataHandler{
         std::string fileLocation=this->algs4Dir+this->fileName;
         //get location of file and see if it exists
 #if __GNUC__ > 8
+        if(std::filesystem::exists(this->algs4Dir+this->fileName)==false)
+            throw std::runtime_error("file "+this->algs4Dir+this->fileName+ "Doesn't exist'");
+#elif __clang_major__ > 6
         if(std::filesystem::exists(this->algs4Dir+this->fileName)==false)
             throw std::runtime_error("file "+this->algs4Dir+this->fileName+ "Doesn't exist'");
 #else

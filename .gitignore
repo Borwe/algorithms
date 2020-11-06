@@ -15,6 +15,9 @@ compile_commands.json
 #ignore .swp files
 *.swp
 
+#files for planning
+shit
+
 #ignore for java
 .classpath
 .gradle/
