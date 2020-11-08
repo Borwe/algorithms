@@ -7,7 +7,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
-#include <vector>
+#include "queue.h"
 #ifndef __GNUC__
     #include <filesystem>
 #else
@@ -42,8 +42,8 @@ namespace DataHandler{
     }
     
 
-    std::vector<std::string> Algs4File::getLines()const{
-        std::vector<std::string> lines;
+    Queue<std::string> Algs4File::getLines()const{
+        Queue<std::string> lines;
 
         std::string fileLocation=this->algs4Dir+this->fileName;
         //get location of file and see if it exists
@@ -62,13 +62,13 @@ namespace DataHandler{
         std::ifstream file(fileLocation.c_str());
         std::string line;//for holding a line
         while(std::getline(file,line)){
-            lines.push_back(line);
+            lines.enqueue(line);
         }
         return lines;
     }
 
-    std::vector<std::string> Algs4File::getWords()const{
-        std::vector<std::string> words;
+    Queue<std::string> Algs4File::getWords()const{
+        Queue<std::string> words;
 
         auto lines=this->getLines();//get the lines in file
         for(auto &line:lines){
@@ -77,7 +77,7 @@ namespace DataHandler{
             boost::split(line_words,line,boost::is_any_of(" "));
 
             for(auto &word:line_words)
-                words.push_back(word);
+                words.enqueue(word);
         }
         return words;
     }
@@ -89,7 +89,6 @@ namespace DataHandler{
 
         size_t pos=0;
         for(auto &word:words){
-            std::cerr<<"WORRD: "<<word<<"\n";
             inSim<<word;
             ++pos;
             if (pos<words.size())
@@ -97,28 +96,30 @@ namespace DataHandler{
         }
         return std::move(inSim);
     }
+
+
+    std::string getHomeDir()
+        #ifdef _WIN32
+        throw()
+        #endif
+    {
+        std::string p;
+        #ifdef _WIN32
+            //we get parent dir here if on windows 10+
+            CHAR path[MAX_PATH];
+            if(SHGetFolderPath(NULL,CSIDL_PROFILE,NULL,0,path)!=S_OK){
+                throw std::runtime_error("no home dir found, something wen't wrong");
+            }else{
+                std::string result(path);
+                return result;
+            }
+        #elif defined(__linux__)
+            //if linux
+            std::string homedir(getpwuid(getuid())->pw_dir);
+            return homedir;
+        #endif
+        return p;
+    }
 }
 
 
-std::string DataHandler::getHomeDir()
-    #ifdef _WIN32
-    throw()
-    #endif
-{
-    std::string p;
-    #ifdef _WIN32
-        //we get parent dir here if on windows 10+
-        CHAR path[MAX_PATH];
-        if(SHGetFolderPath(NULL,CSIDL_PROFILE,NULL,0,path)!=S_OK){
-            throw std::runtime_error("no home dir found, something wen't wrong");
-        }else{
-            std::string result(path);
-            return result;
-        }
-    #elif defined(__linux__)
-        //if linux
-        std::string homedir(getpwuid(getuid())->pw_dir);
-        return homedir;
-    #endif
-    return p;
-}

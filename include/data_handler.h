@@ -6,8 +6,8 @@
 #include <stdexcept>
 #include <string>
 #include <sstream>
+#include "queue.h"
 #include <fstream>
-#include <vector>
 #include <sstream>
 #include "dymamic_preproc.h"
 
@@ -27,8 +27,8 @@ namespace DataHandler{
     public:
         DYNAMIC_SPEC Algs4File(std::string fileName);
         
-        DYNAMIC_SPEC std::vector<std::string> getLines() const;
-        DYNAMIC_SPEC std::vector<std::string> getWords() const;
+        DYNAMIC_SPEC Queue<std::string> getLines() const;
+        DYNAMIC_SPEC Queue<std::string> getWords() const;
 
         DYNAMIC_SPEC std::stringstream simulateWordInput()const;
     };
