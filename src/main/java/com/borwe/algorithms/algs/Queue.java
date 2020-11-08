@@ -52,6 +52,12 @@ public class Queue<Item> implements Iterable<Item>{
 		return N;
 	}
 
+	public void enqueue(Item ...items){
+		for(Item item:items){
+			this.enqueue(item);
+		}
+	}
+
 	public void enqueue(Item item){
 		Node oldLast=last;
 		last=new Node<>();
@@ -90,7 +96,11 @@ public class Queue<Item> implements Iterable<Item>{
         }
 
         result=out.toString();
-        result=result.substring(0, result.length()-2);
+		if(!result.isEmpty() &&
+				result.charAt(result.length()-2)==','){
+			
+			result=result.substring(0, result.length()-2);
+		}
 
         return result;
     }

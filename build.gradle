@@ -70,6 +70,13 @@ task ex1_3_4 (type:JavaExec){
     classpath = sourceSets.main.runtimeClasspath
 }
 
+task ex1_3_9 (type:JavaExec){
+	standardInput = System.in
+    main = "com.borwe.algorithms.exercises.Ex1_3_9"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+
 test {
     // Use junit platform for unit tests
     useJUnitPlatform()

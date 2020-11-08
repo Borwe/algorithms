@@ -5,9 +5,12 @@
  */
 package com.borwe.algorithms.algs.data;
 
+import com.borwe.algorithms.algs.Queue;
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Scanner;
 
 /**
  *
@@ -52,6 +55,37 @@ public class SimulateInput {
 			System.setIn(currInput);
 		}
 
+	}
+
+	public static Queue<String> getUserInputLine(String prompt){
+		//used to get input
+		Queue<String> inputs=new Queue<>();
+		
+		//prompt user for input
+		System.out.println(prompt);
+		
+		Scanner scanner=new Scanner(System.in);
+		while(scanner.hasNextLine()){
+			String line=scanner.nextLine();
+			if(line.trim().isEmpty()){
+				break;
+			}
+			inputs.enqueue(line);
+		}
+		
+		return inputs;
+	}
+
+	public static Queue<String> getUserInputWords(String prompt){
+		Queue<String> inputs=getUserInputLine(prompt);
+		Queue<String> words=new Queue<>();
+
+		while(inputs.isEmpty()==false){
+			String line=inputs.dequeue();
+			words.enqueue(line.trim().split("\\s"));
+		}
+
+		return words;
 	}
 
 	public static String getFileFullName(String fileName){
