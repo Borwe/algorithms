@@ -81,15 +81,17 @@ public:
      * For printing out items in stack as they appear
      */
     const std::string toString() {
+        std::string result="";
 
         std::stringstream strm;
         for(auto &temp:(*this)){
             strm<<temp;
             strm<<", ";
         }
-        strm<<"\n";
-
-        return strm.str();
+        result=strm.str();
+        result=result.substr(0,result.length()-2);
+        
+        return result;
     }
 };
 
