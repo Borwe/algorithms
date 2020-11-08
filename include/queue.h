@@ -89,12 +89,17 @@ public:
     const std::string toString(){
         std::stringstream strm;
 
+        std::string result;
 
         for(auto &temp:(*this)){
             strm<<temp;
             strm<<", ";
         }
-        return strm.str();
+
+        result=strm.str();
+        result=result.substr(0,result.length()-2);
+
+        return result;
     }
 };
 
