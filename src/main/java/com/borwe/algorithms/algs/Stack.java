@@ -38,6 +38,19 @@ public class Stack<Item> implements Iterable<Item>{
 		return N;
 	}
 
+	public static <T> Stack<T>  copy(Stack<T> stack){
+		Stack<T> temp=new Stack<>();
+		Stack<T> copy=new Stack<>();
+		for(T t:stack){
+			temp.push(t);
+		}
+
+		for(T t:temp){
+			copy.push(t);
+		}
+		return copy;
+	}
+
 	public void push(Item item){
 		Node oldfirst=first;
 		first=new Node();
