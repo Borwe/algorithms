@@ -1,6 +1,7 @@
 package com.borwe.algorithms.exercises;
 
 import com.borwe.algorithms.algs.Queue;
+import com.borwe.algorithms.algs.Stack;
 import com.borwe.algorithms.algs.data.SimulateInput;
 
 /*
@@ -15,11 +16,38 @@ import com.borwe.algorithms.algs.data.SimulateInput;
  */
 public class Ex1_3_9 {
 
+	private static String
+		 normalize(Queue<String> strings){
+		Stack<String> operators=new Stack<>();
+		Stack<String> operands=new Stack<>();
+
+		for(String s:strings){
+			switch(s){
+				case "*":
+				case "+":
+				case "-":
+				case "/": operators.push(s);break;
+				case ")": {
+					String operator=operators.pop();
+					String val2=operands.pop();
+					String val1=operands.pop();
+					operands.push("( "+val1+" "+operator
+						+" "+val2+" )");
+				} break;
+				default: operands.push(s);
+			}
+		}
+
+		return operands.pop();
+	}
+
 	public static void main(String[] args) {
 		//get input from user
 		Queue<String> words=SimulateInput.getUserInputWords("Enter some words");
-		System.out.println("Words are:");
-		System.out.println(words);
+
+		System.err.println("INPUT:"+words.toString());
+		System.err.println("OUPUT: "+normalize(words));
+
 	}
 	
 }
