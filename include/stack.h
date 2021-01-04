@@ -3,12 +3,23 @@
 
 #include "node.h"
 #include "iterator.h"
+#include "queue.h"
 #include <deque>
 #include <iostream>
 #include <string>
 #include <utility>
 #include <sstream>
 
+
+template<typename Item>
+class Stack;
+
+
+template<typename T>
+std::ostream &operator<<(std::ostream &os,Stack<T> &stack){
+    os<<stack.toString();
+    return os;
+}
 
 template<typename Item>
 class Stack{
@@ -75,6 +86,29 @@ public:
         //go to the end
         return LinkedListForwardIterator<Item>(nullptr);
     }
+
+    /**
+     * For creating a copy of toBeCopied
+     */
+    template <typename T>
+    static Stack<T> copy(Stack<T> &toBeCopied){
+        Stack<T> copy;
+        //hold temp queue
+        Stack<T> tempStack;
+        for(T t:toBeCopied){
+            T temp=t;
+            tempStack.push(t);
+        }
+
+        for (T t : tempStack) {
+          copy.push(t);
+        }
+
+        return copy;
+    }
+
+    template<typename T>
+    friend std::ostream &operator<<(std::ostream &os,Stack<T> &stack);
 
 
     /**

@@ -2,6 +2,7 @@
 #define ITERATORS_CUSTOM_H
 
 #include <memory>
+#include "node.h"
 
 template<typename T>
 using ShPtr = std::shared_ptr<T>;

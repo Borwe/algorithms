@@ -54,8 +54,9 @@ target_link_libraries(ex1.3.4 PUBLIC data_handler)
 #ex1.3.9
 add_executable(ex1.3.9 src/ex1.3.9.cpp)
 
-#ex1.3.10
-add_executable(ex1.3.10 src/ex1.3.10.cpp)
+#ex1.3.12
+add_executable(ex1.3.12 src/ex1.3.12.cpp)
+target_link_libraries(ex1.3.12 PUBLIC data_handler)
 
 #if using linux and using clang, then set the compler to use libc++
 IF( EXISTS UNIX )
