@@ -59,6 +59,7 @@ add_executable(ex1.3.12 src/ex1.3.12.cpp)
 
 #ex1.3.13
 add_executable(ex1.3.13 src/ex1.3.13.cpp)
+target_link_libraries(ex1.3.13 PUBLIC data_handler)
 
 #for cmake compile_commands.json generation
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

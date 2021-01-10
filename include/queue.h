@@ -6,6 +6,16 @@
 #include "iterator.h"
 #include <string>
 #include <sstream>
+#include <ostream>
+
+template<typename Item>
+class Queue;
+
+template<typename Item>
+std::ostream &operator<<(std::ostream &os,Queue<Item> &queue){
+    os<<queue.toString();
+    return os;
+}
 
 template<typename Item>
 class Queue{
@@ -85,6 +95,10 @@ public:
     LinkedListForwardIterator<Item> end(){
         return LinkedListForwardIterator<Item>(nullptr);
     }
+
+
+    template<typename T>
+    friend std::ostream &operator<<(std::ostream &os,Queue<T> &queue);
 
     const std::string toString(){
         std::stringstream strm;

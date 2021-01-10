@@ -35,7 +35,7 @@ namespace DataHandler{
 #ifdef _WIN32
     const std::string Algs4File::algs4Dir=std::string(getHomeDir()+"/Documents/workspace/algorihms/algs4-data/");
 #else
-    const std::string Algs4File::algs4Dir=std::string(getHomeDir()+"/workspace/algorihms/algs4-data/"); 
+    const std::string Algs4File::algs4Dir=std::string(getHomeDir()+"/Workspace/algorithms/algs4-data/"); 
 #endif
 
 }
