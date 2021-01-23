@@ -9,6 +9,7 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 # setup an executable
 add_executable(${PROJECT_NAME} src/main.cpp)
 
+
 # setup the library to be used for reading data
 # setup for boost algos header files
 find_package(Boost 1.65)
@@ -34,6 +35,9 @@ if(UNIX)
 endif()
 add_executable(data_handler_test src/data_handler_test.cpp)
 target_link_libraries(data_handler_test PUBLIC data_handler)
+
+# hold data object info
+add_library(data SHARED src/data/date.cpp)
 
 # stack_test1
 add_executable(stack_test1 src/stack_test.cpp)
@@ -66,6 +70,7 @@ add_executable(ex1.3.15 src/ex1.3.15.cpp)
 
 #ex1.3.16
 add_executable(ex1.3.16 src/ex1.3.16.cpp)
+target_link_libraries(ex1.3.16 PUBLIC data)
 
 #for cmake compile_commands.json generation
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

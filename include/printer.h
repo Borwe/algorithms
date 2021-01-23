@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 namespace DataHandler{
     template<typename T>
@@ -11,4 +12,14 @@ namespace DataHandler{
         std::cout<<obj;
     }
 
+    std::string promptForReturn(std::string prompt){
+        std::cin.clear();
+        std::cin.clear();
+
+        print(prompt);
+        std::string result;
+        std::cin>>result;
+
+        return result;
+    }
 };
