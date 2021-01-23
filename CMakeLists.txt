@@ -72,6 +72,9 @@ add_executable(ex1.3.15 src/ex1.3.15.cpp)
 add_executable(ex1.3.16 src/ex1.3.16.cpp)
 target_link_libraries(ex1.3.16 PUBLIC data)
 
+#ex1.3.16
+add_executable(ex1.3.17 src/ex1.3.17.cpp)
+
 #for cmake compile_commands.json generation
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 IF( EXISTS "${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json" )
