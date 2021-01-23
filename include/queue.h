@@ -7,6 +7,8 @@
 #include <string>
 #include <sstream>
 #include <ostream>
+#include <cassert>
+#include <iostream>
 
 template<typename Item>
 class Queue;
@@ -56,7 +58,7 @@ public:
         return N==0;
     }
 
-    size_t size(){
+    const size_t size(){
         return N;
     }
 
@@ -81,6 +83,24 @@ public:
         if(this->isEmpty())
             last=nullptr;
         return item;
+    }
+
+    Item operator[](int pos){
+        assert(this->size()>0);
+        assert(pos < this->size());
+        assert(pos >= 0);
+        
+        //loop till reach pos, and return item
+        int i=0;
+        LinkedListForwardIterator<Item> iterator=this->begin();
+        while(i!=pos && i<=pos ){
+            if(pos==i){
+                return *iterator;
+            }
+            ++iterator;
+            ++i;
+        }
+        return first->item;
     }
 
     const Item peek() const{
