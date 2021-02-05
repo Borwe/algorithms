@@ -18,3 +18,6 @@ compile_commands.json
 
 #for rough work
 shit
+
+# for swp vim files
+*.swp
