@@ -5,6 +5,9 @@
  */
 package com.borwe.algorithms.exercises;
 
+import com.borwe.algorithms.algs.data.Printer;
+import com.borwe.algorithms.info.Date;
+
 /**
  *
  * @author brian
@@ -12,7 +15,9 @@ package com.borwe.algorithms.exercises;
 public class Ex1_3_16 {
 
 	public static void main(String[] args) {
-		System.out.println("YOLO bitches");
+		Printer.print("gotten: ").println(args);
+		Printer.print("results: ")
+				.println(Date.readDates(args[0]));
 	}
 	
 }

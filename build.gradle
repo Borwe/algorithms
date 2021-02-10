@@ -92,6 +92,7 @@ task ex1_3_16(type:JavaExec){
 	standardInput = System.in
     main = "com.borwe.algorithms.exercises.Ex1_3_16"
     classpath = sourceSets.main.runtimeClasspath
+	args "22/5/1939"
 }
 
 
