@@ -102,6 +102,11 @@ task ex1_3_17(type:JavaExec){
 	args "Turing","22/5/1939","11.99"
 }
 
+task ex1_3_19(type:JavaExec){
+	standardInput = System.in
+    main = "com.borwe.algorithms.exercises.Ex1_3_19"
+    classpath = sourceSets.main.runtimeClasspath
+}
 
 test {
     // Use junit platform for unit tests
