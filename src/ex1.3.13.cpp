@@ -40,25 +40,17 @@ int main(){
     Queue<int> c=Queue<int>::fillValues(2,5,6,7,4,8,9,3,1,0);
     Queue<int> d=Queue<int>::fillValues(4,3,2,1,0,5,6,7,8,9);
 
-    DataHandler::print("a. ");
-    DataHandler::print(a);
-    DataHandler::print(" passes: ");
-    DataHandler::println(happens(a));
+    DataHandler::Printer::print("a. ").print(a).print(" passes: ")
+        .println(happens(a));
 
-    DataHandler::print("b. ");
-    DataHandler::println(b);
-    DataHandler::print(" passes: ");
-    DataHandler::println(happens(b));
+    DataHandler::Printer::print("b. ").println(b).print(" passes: ")
+        .println(happens(b));
 
-    DataHandler::print("c. ");
-    DataHandler::println(c);
-    DataHandler::print(" passes: ");
-    DataHandler::println(happens(c));
+    DataHandler::Printer::print("c. ").println(c).print(" passes: ")
+        .println(happens(c));
 
-    DataHandler::print("d. ");
-    DataHandler::println(d);
-    DataHandler::print(" passes: ");
-    DataHandler::println(happens(d));
+    DataHandler::Printer::print("d. ").println(d).print(" passes: ")
+        .println(happens(d));
 
     return 0;
 }

@@ -33,7 +33,7 @@ Queue<int> Date::parseDateIntsFromString(const std::string &input){
 
 Date Date::readDates(){
     std::string input=
-        DataHandler::promptForReturn("Give date as input, MM/DD/YYYY");
+        DataHandler::Printer::promptForReturn("Give date as input, MM/DD/YYYY");
 
     return Date(input);
 }
