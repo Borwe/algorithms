@@ -20,17 +20,21 @@ private:
 
     friend std::ostream &operator<<(std::ostream &os,Date &d);
 
-
 public:
-    //public variables
+    Date()=default;
 
     //MM/DD/YY
     Date(std::string date);
 
     /**
+     * Compare if they match
+     */
+    bool operator!=(const Date &date);
+
+    /**
      * Read dates from standard input
      */
-    static Date readDates();
+    static Queue<Date> readDates(int args,char **argv);
 };
 
 #endif

@@ -1,5 +1,6 @@
 #include "data/date.h"
 #include "printer.h"
+#include "queue.h"
 #include <cassert>
 #include <ostream>
 
@@ -31,11 +32,24 @@ Queue<int> Date::parseDateIntsFromString(const std::string &input){
     return holdValues;
 }
 
-Date Date::readDates(){
-    std::string input=
-        DataHandler::Printer::promptForReturn("Give date as input, MM/DD/YYYY");
+bool Date::operator!=(const Date &date){
+    if(this->month==date.month &&
+            this->year == date.year &&
+            this->day == date.day){
+        return true;
+    }
+    return false;
+}
 
-    return Date(input);
+Queue<Date> Date::readDates(int args,char **argv){
+    Queue<Date> queue;
+
+    for(int i=1;i<args;++i){
+        std::string d(argv[i]);
+        queue.enqueue(d);
+    }
+
+    return queue;
 }
 
 Date::Date(std::string date){
