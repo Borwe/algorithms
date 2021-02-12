@@ -1,0 +1,3 @@
+[submodule "algorithms-sedgewick-wayne"]
+	path = algorithms-sedgewick-wayne
+	url = https://github.com/reneargento/algorithms-sedgewick-wayne
