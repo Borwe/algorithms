@@ -65,6 +65,40 @@ public class LinkedList<T> implements Iterable<T> {
 		}
 	}
 
+	/**
+	 * Return true if element deleted
+	 * @param position
+	 * @return 
+	 */
+	public boolean delete(int position){
+		if(position<N && position>=0 ){
+			if(position==0){
+				//meaning delete the first field
+				first=first.next;
+			}else if(position==N-1){
+				//meaning deleting at the end
+				Node current=first;
+				for(int i=0;i<N-2;++i){
+					current=current.next;
+				}
+				current.next=null;
+			}else{
+				//meaning it is an element in the middle
+				Node leftEnd=first; //of element
+				Node rightEnd=first; //of element
+				for(int i=0;i<position;++i){
+					leftEnd=leftEnd.next;
+				}
+				rightEnd=leftEnd.next.next;
+
+				leftEnd.next=rightEnd;
+			}
+			--N;
+			return true;
+		}
+		return false;
+	}
+
 	@Override
 	public Iterator<T> iterator() {
 		return new ListIterator();

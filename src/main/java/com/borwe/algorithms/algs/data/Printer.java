@@ -51,4 +51,8 @@ public class Printer {
 		return printer;
 	}
 	
+	public static Printer newLine(){
+		println("");
+		return printer;
+	}
 }
