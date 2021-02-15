@@ -99,6 +99,15 @@ public class LinkedList<T> implements Iterable<T> {
 		return false;
 	}
 
+	public boolean find(T key){
+		for(T t:this){
+			if(t.equals(key)){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public Iterator<T> iterator() {
 		return new ListIterator();
