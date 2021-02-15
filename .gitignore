@@ -16,7 +16,6 @@ algs4-data
 compile_commands.json
 .cache
 include/
-data/
 
 #for rough work
 shit
