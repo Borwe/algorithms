@@ -38,7 +38,7 @@ add_executable(data_handler_test src/data_handler_test.cpp)
 target_link_libraries(data_handler_test PUBLIC data_handler)
 
 # hold data object info
-add_library(data SHARED src/data/date.cpp)
+add_library(data SHARED src/data/date.cpp src/data/transaction.cpp)
 
 # stack_test1
 add_executable(stack_test1 src/stack_test.cpp)

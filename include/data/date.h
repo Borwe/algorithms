@@ -25,6 +25,7 @@ public:
 
     //MM/DD/YY
     Date(std::string date);
+    Date(const Date &date);
 
     /**
      * Compare if they match

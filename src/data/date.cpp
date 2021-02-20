@@ -48,7 +48,6 @@ Queue<Date> Date::readDates(int args,char **argv){
         std::string d(argv[i]);
         queue.enqueue(d);
     }
-
     return queue;
 }
 
@@ -58,4 +57,8 @@ Date::Date(std::string date){
     month=values.dequeue();
     day=values.dequeue();
     year=values.dequeue();
+}
+
+Date::Date(const Date &d):month(d.month),day(d.day),year(d.year){
+    
 }

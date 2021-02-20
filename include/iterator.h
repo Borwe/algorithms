@@ -20,7 +20,7 @@ public:
         node=node->next;
     }
 
-    const bool operator!=(LinkedListForwardIterator<Item> &s2)const{
+    const bool operator!=(LinkedListForwardIterator<Item> s2){
         bool value=false;
         if(s2.node==nullptr && this->node==nullptr){
             //meaning they are equal

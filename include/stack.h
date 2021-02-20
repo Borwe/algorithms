@@ -118,10 +118,15 @@ public:
         std::string result="";
 
         std::stringstream strm;
-        for(auto &temp:(*this)){
-            strm<<temp;
+
+        auto iterator=begin();
+
+        while(iterator!=end()){
+            strm<<*iterator;
             strm<<", ";
+            ++iterator;
         }
+
         result=strm.str();
         result=result.substr(0,result.length()-2);
         

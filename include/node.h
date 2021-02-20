@@ -10,6 +10,8 @@ private:
 public:
     Item item;
     std::shared_ptr<Node> next;
+
+    Node()=default;
 };
 
 template<typename Item>

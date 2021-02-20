@@ -118,16 +118,19 @@ public:
 
 
     template<typename T>
-    friend std::ostream &operator<<(std::ostream &os,Queue<T> &queue);
+    friend std::ostream &operator<<(std::ostream &os,const Queue<T> &queue);
 
-    const std::string toString(){
+    const std::string toString() {
         std::stringstream strm;
 
         std::string result;
 
-        for(auto &temp:(*this)){
-            strm<<temp;
+        auto iterator=begin();
+
+        while(iterator!=end()){
+            strm<<*iterator;
             strm<<", ";
+            ++iterator;
         }
 
         result=strm.str();
