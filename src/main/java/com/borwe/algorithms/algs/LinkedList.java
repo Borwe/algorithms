@@ -99,8 +99,8 @@ public class LinkedList<T> implements Iterable<T> {
 		return false;
 	}
 
-	public boolean find(T key){
-		for(T t:this){
+	public static <T> boolean find(final LinkedList<T> list,String key){
+		for(T t:list){
 			if(t.equals(key)){
 				return true;
 			}

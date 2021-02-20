@@ -22,7 +22,9 @@ public class Ex1_3_21 {
 		stringsList.add("boom");
 
 		Printer.print("Gotten: ").println(stringsList.toString());
-		Printer.println("Check for 'ex' string: "+stringsList.find("ex"));
-		Printer.println("Checking for 'zoo' string: "+stringsList.find("zoo"));
+		Printer.println("Check for 'ex' string: "+
+				LinkedList.find(stringsList,"ex"));
+		Printer.println("Checking for 'zoo' string: "+
+				LinkedList.find(stringsList,"zoo"));
 	}
 }
