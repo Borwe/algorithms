@@ -13,16 +13,16 @@ Transaction::Transaction(const std::string name,const Date date,double amount)
 
 Queue<Transaction> Transaction::readTransaction(int argc,char **argv){
     Queue<Transaction> transactions;
-    int size=argc-1; //number of items passed
-    assert(size % 3 ==0); //make sure only three value groups where sent
+    assert(argc % 3 ==0); //make sure only three value groups where sent
 
-    int limit=size/3;
-    for(int group_loop=0,in_loop=1;group_loop<limit;++group_loop){
+    int limit=argc/3;
+    for(int group_loop=0,in_loop=0;group_loop<limit;++group_loop){
         int count_for_group=0;
         Queue<std::string> group_values;
         while(count_for_group<3){
             group_values.enqueue(argv[in_loop]);
             ++in_loop;
+            ++count_for_group;
         }
 
         std::string customer_name=group_values.dequeue();
@@ -36,4 +36,10 @@ Queue<Transaction> Transaction::readTransaction(int argc,char **argv){
         transactions.enqueue(std::move(t));
     }
     return transactions;
+}
+
+
+std::ostream &operator<<(std::ostream &os,Transaction &trans){
+    os<<"[ "<<trans.name<<","<<trans.d<<","<<trans.amount<<" ]";
+    return os;
 }

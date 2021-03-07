@@ -2,8 +2,15 @@
 #define TRANSACTION_HEADER_CUSTOM
 
 #include <data/date.h>
+#include <ostream>
 #include <string>
 #include "queue.h"
+#include <ostream>
+
+class Transaction;
+
+
+std::ostream &operator<<(std::ostream &os,Transaction &trans);
 
 class Transaction{
 private:
@@ -21,6 +28,8 @@ public:
 
     static Queue<Transaction> readTransaction(int argc,char **argv);
     Transaction &operator=(const Transaction &trans)=default;
+
+    friend std::ostream &operator<<(std::ostream &os,Transaction &trans);
 };
 
 #endif

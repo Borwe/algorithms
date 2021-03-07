@@ -28,7 +28,7 @@ public:
         }else if(s2.node==nullptr && this->node!=nullptr){
             //they aren't equal
             value =true;
-        }else if(node->item!=s2.node->item){
+        }else {
             //both are not equal and non null
             value=true;
         }

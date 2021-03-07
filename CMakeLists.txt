@@ -75,6 +75,7 @@ target_link_libraries(ex1.3.16 PUBLIC data)
 
 #ex1.3.17
 add_executable(ex1.3.17 src/ex1.3.17.cpp)
+target_link_libraries(ex1.3.17 PUBLIC data)
 
 #for cmake compile_commands.json generation
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
