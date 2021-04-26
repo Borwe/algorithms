@@ -24,27 +24,13 @@
 #include <stdexcept>
 #include <string>
 #include "queue.h"
-#ifndef __GNUC__
-    #include <filesystem>
-#else
-    #if __GNUC__ > 8
-        #include <filesystem>
-    #elif __clang_major__ > 6
-        #include <filesystem>
-    #else
-        #include <boost/filesystem.hpp>
-    #endif
-#endif
+#include <vector>
 
-#include <boost/algorithm/string.hpp>
-
-//for linux
+//for linux getting home directory
 #ifdef __linux__
-
 #include <unistd.h>
 #include <sys/types.h>
 #include <pwd.h>
-
 #endif
 
 //for windows getting home directory
@@ -53,6 +39,12 @@
 #endif
 
 namespace DataHandler{
+#ifdef _WIN32
+    const std::string Algs4File::algs4Dir=std::string(getHomeDir()+"/Documents/workspace/algorihms/algs4-data/");
+#else
+    const std::string Algs4File::algs4Dir=std::string(getHomeDir()+"/Workspace/algorithms/algs4-data/"); 
+#endif
+
     Algs4File::Algs4File(std::string fileName){
         this->fileName=fileName;
     }
@@ -61,21 +53,15 @@ namespace DataHandler{
     Queue<std::string> Algs4File::getLines()const{
         Queue<std::string> lines;
 
-        std::string fileLocation=this->algs4Dir+this->fileName;
+        std::string fileLocation=Algs4File::algs4Dir+this->fileName;
+        std::cout<<"FILE @: "<<fileLocation.c_str()<<std::endl;
         //get location of file and see if it exists
-#if __GNUC__ > 8
-        if(std::filesystem::exists(this->algs4Dir+this->fileName)==false)
-            throw std::runtime_error("file "+this->algs4Dir+this->fileName+ "Doesn't exist'");
-#elif __clang_major__ > 6
-        if(std::filesystem::exists(this->algs4Dir+this->fileName)==false)
-            throw std::runtime_error("file "+this->algs4Dir+this->fileName+ "Doesn't exist'");
-#else
-        std::string fileToCheckIfExists=this->algs4Dir+this->fileName;
-        if(boost::filesystem::exists(boost::filesystem::path(fileToCheckIfExists.c_str()))==false)
-            throw std::runtime_error("file "+this->algs4Dir+this->fileName+ "Doesn't exist'");
-#endif
+        
+        std::ifstream file;
+        file.open(fileLocation.c_str());
+        if(file.is_open()==false)
+            throw std::runtime_error("file "+fileLocation+ " Doesn't exist'");
 
-        std::ifstream file(fileLocation.c_str());
         std::string line;//for holding a line
         while(std::getline(file,line)){
             lines.enqueue(line);
@@ -89,10 +75,9 @@ namespace DataHandler{
         auto lines=this->getLines();//get the lines in file
         for(auto &line:lines){
             //get the words in the line and store them into words
-            std::vector<std::string> line_words;
-            boost::split(line_words,line,boost::is_any_of(" "));
-
-            for(auto &word:line_words)
+            std::stringstream line_words(line);
+            std::string word;
+            while(line_words >> word)
                 words.enqueue(word);
         }
         return words;
