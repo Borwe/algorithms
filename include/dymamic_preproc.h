@@ -14,20 +14,18 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef NAME_OF_FILE
+#ifndef DYN_PREC
 
 //for windows OS
 #ifdef _WIN32
-#ifdef DYNAMIC_DLL
-#define DYNAMIC_SPEC __declspec(dllexport)
+    #ifdef DYNAMIC_DLL
+        #define DYNAMIC_SPEC __declspec(dllexport)
+    #else
+        #define DYNAMIC_SPEC __declspec(dllimport)
+    #endif
 #else
-#define DYNAMIC_SPEC __declspec(dllimport)
-#endif
-#endif
-
-//meaning probably not on windows os
-#ifndef DYNAMIC_DLL
-#define DYNAMIC_SPEC  
+    //meaning probably not on windows os
+    #define DYNAMIC_SPEC  
 #endif
 
 #endif
