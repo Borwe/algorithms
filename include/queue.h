@@ -97,8 +97,13 @@ public:
         first=first->next;
         --N;
         if(this->isEmpty())
-            last=nullptr;
-        return item;
+            throw std::runtime_error("Calling dequeue() on empty queue");
+        else{
+            Item item=first->item;
+            first=first->next;
+            --N;
+            return item;
+        }
     }
 
     Item operator[](int pos){
