@@ -34,5 +34,14 @@ public class Ex1_3_24 {
 		list.add(3);
 		list.add(4);
 		list.add(5);
+
+		System.out.println(list);
+
+		// want to delete 3, so delete after "2"
+		list.removeAfter(2);
+		System.out.println(list);
+		// want to remove 5, so delete after "4"
+		list.removeAfter(4);
+		System.out.println(list);
 	}
 }

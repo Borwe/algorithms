@@ -110,13 +110,33 @@ public class LinkedList<T> implements Iterable<T> {
 		return false;
 	}
 
-	public static <T> boolean find(final LinkedList<T> list,String key){
+	public static <T> boolean find(final LinkedList<T> list,T key){
 		for(T t:list){
 			if(t.equals(key)){
 				return true;
 			}
 		}
 		return false;
+	}
+
+	public void removeAfter(T item){
+		if(isEmpty() || !find(this, item))
+			return;
+
+		boolean found=false;
+		int position=-1;
+		for(T t:this){
+			if(t== item || t.equals(item) ){
+				++position;
+				found=true;
+				break;
+			}
+			++position;
+		}
+
+		if(found==true){
+			delete(position);
+		}
 	}
 
 	@Override
